@@ -50,7 +50,7 @@
 
 %%%%%%%%% paquet prettyref
 \usepackage{prettyref}
-\newrefformat{eq}{\textup{(\ref{#1})}}
+\newrefformat{eq}{Equació \ref{#1}  de la pàgina \pageref{#1}}
 \newrefformat{lem}{Lemma \ref{#1}}
 \newrefformat{teo}{Teorema \ref{#1} de la pàgina \pageref{#1}}
 \newrefformat{cap}{Capítol \ref{#1}}
@@ -99,7 +99,7 @@
 \tableofcontents
 
 \section{Primera secció}\label{sec:primera}
-\lipsum[1-4]
+\lipsum[1-3]
 
 \begin{meuteo}\label{teo:pitagores}
  Teorema de Pitàgores: La suma dels quadrarts dels catets és igual al quadrat de la hipotenusa:
@@ -111,18 +111,26 @@
 \lipsum[2-3]
 
 \section{Segona secció}\label{sec:segona}
-\lipsum[1-6].
+\lipsum[1-3].
+\begin{equation}\label{eq:segongrau}
+ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
+\end{equation}
+
 
 Anem a la Primera secció \prettyref{sec:primera}
 
 \lipsum[2-3]
 
 \section{Tercera secció}\label{sec:tercera}
-\lipsum[1-6]
+\lipsum[1-3]
 
 Anem al Teorema de Pitàgores \prettyref{teo:pitagores}
 
 I ara amb autoref: Anem al Teorema de Pitàgores \autoref{teo:pitagores}
+
+\lipsum[2-3]
+
+Veure l'\prettyref{eq:segongrau}
 
 \lipsum[2-3]
 \end{document}
