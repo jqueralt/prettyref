@@ -1,0 +1,128 @@
+%http://tex.stackexchange.com/questions/60894/how-do-i-insert-names-into-birthday-invitations-automatically?newsletter=1&nlcode=21629|f5d0
+
+
+% http://latex-my.blogspot.com/2012/01/mail-merge-batch-generating-documents.html 
+
+
+% Usem la potència del paquet scrartcl de KOMA-script
+\documentclass[fontsize=11pt,%
+               paper=a4,%
+               %BCOR=12mm,% marge per relligar
+               %DIV=calc,%
+               %twoside,%per defecte 1 cara
+               %pagesize,%
+               captions=tableheading,%
+               numbers=noenddot,%
+               parskip=full,%
+               % toc=graduated%
+               %toc=flat %índex amb ítems sense sagnar
+               ]{scrartcl}  
+
+% codificació
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}                   % patrons de separació de paraules 
+% tipus de lletra                                               
+\usepackage[scaled=.88]{beramono}             % Bera-Monospace
+\usepackage[scaled=.86]{berasans}             % Bera Sans-Serif
+\usepackage[osf]{mathpazo}                    % Palatino com a font per defecte
+\linespread{1.05}\selectfont                  % Palatino necessita més espai, aquí el 5%
+\usepackage{ulem}                             % paquet per subratllar
+%gràfics
+\usepackage{eso-pic}                          % paquet per clavar imatges a pàgines
+\usepackage{graphicx}                         % paquet per incloure imatges
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{colortbl}
+% paquets per taules
+\usepackage{booktabs,array}                   % Taules agradables
+\usepackage{ctable}  
+
+\usepackage{lipsum}
+\usepackage{lastpage}
+
+
+\usepackage{amsthm}
+\newtheorem{meuteo}{Teorema}
+
+
+
+
+%%%%%%%%% paquet prettyref
+\usepackage{prettyref}
+\newrefformat{eq}{\textup{(\ref{#1})}}
+\newrefformat{lem}{Lemma \ref{#1}}
+\newrefformat{teo}{Teorema \ref{#1} de la pàgina \pageref{#1}}
+\newrefformat{cap}{Capítol \ref{#1}}
+\newrefformat{sec}{Secció \ref{#1}}
+\newrefformat{tau}{Taula \ref{#1} de la pàgina \pageref{#1}}
+\newrefformat{fig}{Figura \ref{#1} de la pàgina \pageref{#1}}
+
+
+
+
+% paquet pel formatatge de la pàgina: capçaleres i peus
+\usepackage{scrpage2}
+\clearscrheadfoot
+\setlength{\headheight}{55pt}                           % espai extra per la imatge de la capçalera
+\pagestyle{scrheadings}
+\ihead[]{\includegraphics[scale=.5]{catalatex_logo.png}}
+\ofoot[]{\thepage\ |\ \pageref{LastPage}}
+% paquet per la configuració electrònica del PDF resultant
+\definecolor{linkcolor}{rgb}{0,0,0.42}             % color de l'enllaç
+\usepackage{hyperref}                              % configuració d'hyperref per pdf
+  \hypersetup{%
+    pdfauthor={(c) 2012 Joan Queralt},%
+    pdftitle={Certificats de notes},%
+    pdfsubject={Certificats de notes pels estudiants amb resum pel professorat},%
+    bookmarksopen=true, %finestreta de marcadors oberta quan s'obre el document
+    %backref=true,
+    linktocpage=true,
+    urlcolor=linkcolor,
+    citecolor=linkcolor,
+    linkcolor=linkcolor,
+    colorlinks=true,
+  }
+\def\meuteoautorefname{Teorema} % li diem a autoref què posar on trobi el teorema ``meuteo``
+  
+% paquet per gestionar les extensions microtipogràfiques: protrusió dels caràcters i expansió dels tipus
+\usepackage[stretch=10]{microtype}  
+
+\author{Joan Queralt Gil}
+\title{Prova de prettyref}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{Primera secció}\label{sec:primera}
+\lipsum[1-4]
+
+\begin{meuteo}\label{teo:pitagores}
+ Teorema de Pitàgores: La suma dels quadrarts dels catets és igual al quadrat de la hipotenusa:
+ 
+ \[h^2 = c_1{^2} + c_2{^2} \]
+\end{meuteo}
+
+
+\lipsum[2-3]
+
+\section{Segona secció}\label{sec:segona}
+\lipsum[1-6].
+
+Anem a la Primera secció \prettyref{sec:primera}
+
+\lipsum[2-3]
+
+\section{Tercera secció}\label{sec:tercera}
+\lipsum[1-6]
+
+Anem al Teorema de Pitàgores \prettyref{teo:pitagores}
+
+I ara amb autoref: Anem al Teorema de Pitàgores \autoref{teo:pitagores}
+
+\lipsum[2-3]
+\end{document}
