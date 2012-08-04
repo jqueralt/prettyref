@@ -1,0 +1,7 @@
+# Paquet prettyref
+
+Un paquet que pot millorar les citacions i referències creuades d'un document
+
+Es pot trobar la (poca) documentació a http://texdoc.net/texmf-dist/doc/latex/prettyref/prettyref.pdf
+
+Atenció amb les diferències amb el comandament \autoref del paquet hyperref
