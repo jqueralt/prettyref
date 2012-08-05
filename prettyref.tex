@@ -1,9 +1,3 @@
-%http://tex.stackexchange.com/questions/60894/how-do-i-insert-names-into-birthday-invitations-automatically?newsletter=1&nlcode=21629|f5d0
-
-
-% http://latex-my.blogspot.com/2012/01/mail-merge-batch-generating-documents.html 
-
-
 % Usem la potència del paquet scrartcl de KOMA-script
 \documentclass[fontsize=11pt,%
                paper=a4,%
@@ -31,27 +25,33 @@
 %gràfics
 \usepackage{eso-pic}                          % paquet per clavar imatges a pàgines
 \usepackage{graphicx}                         % paquet per incloure imatges
-\usepackage{color}
-\usepackage{xcolor}
-\usepackage{colortbl}
+\usepackage{color}                            % paquet per incloure colors
+\usepackage{xcolor}                           % paquet per incloure colors
+% per fer les caixes de color
+\usepackage{tcolorbox}             % crea les caixes de color
+\tcbuselibrary{skins}              % llibreria per fer caixes tipus beamer, crida a tikz
+\usetikzlibrary{shadings,shadows}  % per usar la skin=beamer de tcolorbox
 % paquets per taules
 \usepackage{booktabs,array}                   % Taules agradables
 \usepackage{ctable}  
+\usepackage{colortbl}
 
-\usepackage{lipsum}
-\usepackage{lastpage}
+\usepackage{lipsum}                % paquet per crear text de farciment
+\usepackage{lastpage}              % paquet per posar el número d ela darrera pàgina
 
-
-\usepackage{amsthm}
-\newtheorem{meuteo}{Teorema}
+\usepackage{amsthm}                % paquet per millores matemàtiques, teoremes
+\newtheorem{meuteo}{Teorema}       % definició del teorema
 
 
 
 
 %%%%%%%%% paquet prettyref
+% crida al paquet
 \usepackage{prettyref}
+% les etiquetes cal que portin un codi inicial per definir què són: sec: per secció, etc.
+% definim els textos que apareixeran quan cridem a \prettyref:
 \newrefformat{eq}{Equació \ref{#1} de la pàgina \pageref{#1}}
-\newrefformat{lem}{Lemma \ref{#1}}
+\newrefformat{lem}{Lema \ref{#1}}
 \newrefformat{teo}{Teorema \ref{#1} de la pàgina \pageref{#1}}
 %\newrefformat{cap}{Capítol \ref{#1}}
 \newrefformat{sec}{Secció \ref{#1}}
@@ -59,31 +59,29 @@
 \newrefformat{fig}{Figura \ref{#1} de la pàgina \pageref{#1}}
 
 
-
-
 % paquet pel formatatge de la pàgina: capçaleres i peus
 \usepackage{scrpage2}
 \clearscrheadfoot
 \setlength{\headheight}{55pt}                           % espai extra per la imatge de la capçalera
 \pagestyle{scrheadings}
-\ihead[]{\includegraphics[scale=.5]{catalatex_logo.png}}
+\ohead[]{\includegraphics[scale=.25]{catalatex_logo.png}}
 \ofoot[]{\thepage\ |\ \pageref{LastPage}}
+
 % paquet per la configuració electrònica del PDF resultant
 \definecolor{linkcolor}{rgb}{0,0,0.42}             % color de l'enllaç
 \usepackage{hyperref}                              % configuració d'hyperref per pdf
   \hypersetup{%
     pdfauthor={(c) 2012 Joan Queralt},%
-    pdftitle={Certificats de notes},%
-    pdfsubject={Certificats de notes pels estudiants amb resum pel professorat},%
+    pdftitle={Prova de prettyref},%
+    pdfsubject={Millores de les referències creuades amb prettyref},%
     bookmarksopen=true, %finestreta de marcadors oberta quan s'obre el document
-    %backref=true,
     linktocpage=true,
     urlcolor=linkcolor,
     citecolor=linkcolor,
     linkcolor=linkcolor,
     colorlinks=true,
   }
-\def\meuteoautorefname{Teorema} % li diem a autoref què posar on trobi el teorema ``meuteo``
+\def\meuteoautorefname{Teorema} % li diem a \autoref què posar on trobi el teorema ``meuteo``
   
 % paquet per gestionar les extensions microtipogràfiques: protrusió dels caràcters i expansió dels tipus
 \usepackage[stretch=10]{microtype}  
@@ -97,12 +95,25 @@
 \maketitle
 
 \tableofcontents
-
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Primera secció}\label{sec:primera}
+\lipsum[1]
 
-Vegi's la \prettyref{tau:durada}. La referència creuada s'ha creat amb el comandament \verb+\prettyref{tau:durada}+
+\begin{tcolorbox}[%
+skin=beamer,                  %
+width=\linewidth-2cm,         % escurça 2 cm per la dreta
+fonttitle=\sffamily\bfseries, % tipus de lletra del títol
+coltitle=black,               % color de la lletra del títol
+colframe=yellow!50!red,       % color del marc i del fons de la zona superior
+%colframe=red!30!yellow,      % color del marc i del fons de la zona superior
+colback=white,                % color de fons de la zona inferior
+title=Referència a taula]     % títol a la zona superior
+Vegi's la \prettyref{tau:durada}. La referència creuada s'ha creat amb el comandament \verb+\prettyref{tau:durada}+.
+\end{tcolorbox}
 
-\lipsum[1-3]
+\lipsum[2-3]
+
 
 \begin{meuteo}\label{teo:pitagores}
  Teorema de Pitàgores: La suma dels quadrarts dels catets és igual al quadrat de la hipotenusa:
@@ -112,8 +123,19 @@ Vegi's la \prettyref{tau:durada}. La referència creuada s'ha creat amb el coman
 
 \lipsum[2-3]
 
+\begin{tcolorbox}[%
+skin=beamer,      
+width=\linewidth-2cm,         % escurça 2 cm per la dreta
+fonttitle=\sffamily\bfseries, % tipus de lletra del títol
+coltitle=black,               % color de la lletra del títol
+colframe=yellow!50!red,       % color del marc i del fons de la zona superior
+%colframe=red!30!yellow,      % color del marc i del fons de la zona superior
+colback=white,                % color de fons de la zona inferior
+title=Referència a figura]     % títol a la zona superior
 Vegi's la \prettyref{fig:qrcode}. La referència creuada s'ha creat amb el comandament \verb+\prettyref{fig:qrcode}+ 
-I aqui amb \verb+\autoref{fig:qrcode}+: vegeu la \autoref{fig:qrcode}.
+\\I aqui amb \verb+\autoref{fig:qrcode}+: vegeu la \autoref{fig:qrcode}.
+\end{tcolorbox}
+
 
 \section{Segona secció}\label{sec:segona}
 \lipsum[1-3].
@@ -121,16 +143,36 @@ I aqui amb \verb+\autoref{fig:qrcode}+: vegeu la \autoref{fig:qrcode}.
  x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
 \end{equation}
 
+\begin{tcolorbox}[%
+skin=beamer,      
+width=\linewidth-2cm,         % escurça 2 cm per la dreta
+fonttitle=\sffamily\bfseries, % tipus de lletra del títol
+coltitle=black,               % color de la lletra del títol
+colframe=yellow!50!red,       % color del marc i del fons de la zona superior
+%colframe=red!30!yellow,      % color del marc i del fons de la zona superior
+colback=white,                % color de fons de la zona inferior
+title=Referència a secció]     % títol a la zona superior
 Anem a la \prettyref{sec:primera}. Aquesta referència creuada s'ha creat amb el comandament \verb+\prettyref{sec:primera}+
+\end{tcolorbox}
 
 \lipsum[2-3]
 
 \section{Tercera secció}\label{sec:tercera}
 \lipsum[1-3]
 
+% Caixes de color
+\begin{tcolorbox}[%
+skin=beamer,      
+width=\linewidth-2cm,         % escurça 2 cm per la dreta
+fonttitle=\sffamily\bfseries, % tipus de lletra del títol
+coltitle=black,               % color de la lletra del títol
+colframe=yellow!50!red,       % color del marc i del fons de la zona superior
+%colframe=red!30!yellow,      % color del marc i del fons de la zona superior
+colback=white,                % color de fons de la zona inferior
+title=Referència a teorema]     % títol a la zona superior
 Vegi's el \prettyref{teo:pitagores}. Aquesta referència creuada s'ha creat amb el comandament \verb+\prettyref{teo:pitagores}+
-
-I ara amb autoref: Vegi's el \autoref{teo:pitagores}. Aquesta referència creuada s'ha creat amb el comandament \verb+ \autoref{teo:pitagores}+
+\\I ara amb autoref: Vegi's el \autoref{teo:pitagores}. Aquesta referència creuada s'ha creat amb el comandament \verb+ \autoref{teo:pitagores}+
+\end{tcolorbox}
 
 \lipsum[2-3]
 
@@ -138,7 +180,7 @@ I ara amb autoref: Vegi's el \autoref{teo:pitagores}. Aquesta referència creuad
   \centering
   \begin{tabular}{llll}
     \toprule
-    Tipus & Acreditació & gr/l & $K_c$ \\
+    Tipus & Durada & gr/l & $K_c$ \\
     \midrule
     A & 10 h & 6.78 & 0.2345 \\
     B & 15 h & 3.49 & 0.1987 \\
@@ -148,12 +190,21 @@ I ara amb autoref: Vegi's el \autoref{teo:pitagores}. Aquesta referència creuad
   \label{tau:durada}
 \end{table}
 
-
+\begin{tcolorbox}[%
+skin=beamer,      
+width=\linewidth-2cm,         % escurça 2 cm per la dreta
+fonttitle=\sffamily\bfseries, % tipus de lletra del títol
+coltitle=black,               % color de la lletra del títol
+colframe=yellow!50!red,       % color del marc i del fons de la zona superior
+%colframe=red!30!yellow,      % color del marc i del fons de la zona superior
+colback=white,                % color de fons de la zona inferior
+title=Referència a equació]     % títol a la zona superior
 Veure l'\prettyref{eq:segongrau}. Aquesta referència creuada s'ha creat amb el comandament \verb+\prettyref{eq:segongrau}+
+\end{tcolorbox}
 
-\lipsum[2-3]
+\lipsum[2-4]
 
-\begin{figure}[h]
+\begin{figure}[ht]
  \centering
  \includegraphics[scale=0.5,keepaspectratio=true]{./qrplanet.png}
  \label{fig:qrcode}
@@ -161,3 +212,16 @@ Veure l'\prettyref{eq:segongrau}. Aquesta referència creuada s'ha creat amb el 
 \end{figure}
 
 \end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Caixes de color
+\begin{tcolorbox}[%
+width=\linewidth-2cm,         % escurça 2 cm per la dreta
+fonttitle=\sffamily\bfseries, % tipus de lletra del títol
+coltitle=black,               % color de la lletra del títol
+colframe=yellow!50!red,       % color del marc i del fons de la zona superior
+%colframe=red!30!yellow,      % color del marc i del fons de la zona superior
+colback=white,                % color de fons de la zona inferior
+title=Referència a taula]     % títol a la zona superior
+
+\end{tcolorbox}
