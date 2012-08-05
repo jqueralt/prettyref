@@ -50,10 +50,10 @@
 
 %%%%%%%%% paquet prettyref
 \usepackage{prettyref}
-\newrefformat{eq}{Equació \ref{#1}  de la pàgina \pageref{#1}}
+\newrefformat{eq}{Equació \ref{#1} de la pàgina \pageref{#1}}
 \newrefformat{lem}{Lemma \ref{#1}}
 \newrefformat{teo}{Teorema \ref{#1} de la pàgina \pageref{#1}}
-\newrefformat{cap}{Capítol \ref{#1}}
+%\newrefformat{cap}{Capítol \ref{#1}}
 \newrefformat{sec}{Secció \ref{#1}}
 \newrefformat{tau}{Taula \ref{#1} de la pàgina \pageref{#1}}
 \newrefformat{fig}{Figura \ref{#1} de la pàgina \pageref{#1}}
@@ -99,6 +99,9 @@
 \tableofcontents
 
 \section{Primera secció}\label{sec:primera}
+
+Vegi's la \prettyref{tau:durada}. La referència creuada s'ha creat amb el comandament \verb+\prettyref{tau:durada}+
+
 \lipsum[1-3]
 
 \begin{meuteo}\label{teo:pitagores}
@@ -107,8 +110,10 @@
  \[h^2 = c_1{^2} + c_2{^2} \]
 \end{meuteo}
 
-
 \lipsum[2-3]
+
+Vegi's la \prettyref{fig:qrcode}. La referència creuada s'ha creat amb el comandament \verb+\prettyref{fig:qrcode}+ 
+I aqui amb \verb+\autoref{fig:qrcode}+: vegeu la \autoref{fig:qrcode}.
 
 \section{Segona secció}\label{sec:segona}
 \lipsum[1-3].
@@ -116,21 +121,43 @@
  x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
 \end{equation}
 
-
-Anem a la Primera secció \prettyref{sec:primera}
+Anem a la \prettyref{sec:primera}. Aquesta referència creuada s'ha creat amb el comandament \verb+\prettyref{sec:primera}+
 
 \lipsum[2-3]
 
 \section{Tercera secció}\label{sec:tercera}
 \lipsum[1-3]
 
-Anem al Teorema de Pitàgores \prettyref{teo:pitagores}
+Vegi's el \prettyref{teo:pitagores}. Aquesta referència creuada s'ha creat amb el comandament \verb+\prettyref{teo:pitagores}+
 
-I ara amb autoref: Anem al Teorema de Pitàgores \autoref{teo:pitagores}
+I ara amb autoref: Vegi's el \autoref{teo:pitagores}. Aquesta referència creuada s'ha creat amb el comandament \verb+ \autoref{teo:pitagores}+
+
+\lipsum[2-3]
+
+ \begin{table}[ht]
+  \centering
+  \begin{tabular}{llll}
+    \toprule
+    Tipus & Acreditació & gr/l & $K_c$ \\
+    \midrule
+    A & 10 h & 6.78 & 0.2345 \\
+    B & 15 h & 3.49 & 0.1987 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Exemple de taula}
+  \label{tau:durada}
+\end{table}
+
+
+Veure l'\prettyref{eq:segongrau}. Aquesta referència creuada s'ha creat amb el comandament \verb+\prettyref{eq:segongrau}+
 
 \lipsum[2-3]
 
-Veure l'\prettyref{eq:segongrau}
+\begin{figure}[h]
+ \centering
+ \includegraphics[scale=0.5,keepaspectratio=true]{./qrplanet.png}
+ \label{fig:qrcode}
+ \caption{Codi QR}
+\end{figure}
 
-\lipsum[2-3]
 \end{document}
